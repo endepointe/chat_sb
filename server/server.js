@@ -1,46 +1,39 @@
-const express = require('express');
+const app = require('express')();
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
 const path = require('path');
 const cors = require('cors');
-const app = express();
-const server = require('http').createServer(app);
-const io = require('socket.io')(server);
+const messages = [];
+let messageCount = 0;
+const bot = 'Abel';
 
 const port = normalizePort(process.env.PORT || '3001');
 
-app.set('port', port);
-
 const indexRouter = require('./routes/index');
 
+app.set('port', port);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-
 //app.use(express.static(path.join(__dirname, 'build')));
-app.use(cors());
 
-app.use(function (req, res, next) {
-  // update to match the domain you will make the request from
-  //res.header("Access-Control-Allow-Origin", "http://localhost:3000");
-  //res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  res.header("Access-Control-Allow-Credentials", "true");
-  next();
-});
+app.use(cors());
 
 app.use(indexRouter);
 
 io.on('connection', (socket) => {
-  /*
-  socket.on('join', async room => {
-    socket.join(room);
-    io.emit('roomJoined', room);
-  });
-  */
-  /*
-   socket.on('message', data => {
-     io.emit('newMessage', data);
-   });
-   */
   console.log('client connected');
+
+  socket.on('message', data => {
+    //messages.push(data);
+    io.emit('new message', data);
+    //messageCount++;
+    console.log(data);
+  });
+
+  socket.on('disconnect', () => {
+    console.log('client disconnected');
+  });
 });
 
 function normalizePort(val) {
@@ -59,4 +52,4 @@ function normalizePort(val) {
   return false;
 }
 
-app.listen(port, () => console.log(`server running on port ${port}`));
+server.listen(port, () => console.log(`server running on port ${port}`));
