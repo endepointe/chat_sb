@@ -9,7 +9,6 @@ const url = 'http://localhost:3001';
 const socket = io(url);
 
 const Chat = () => {
-  const [message, setMessage] = useState('');
 
   useEffect(() => {
     socket.on('new message', (data) => {
@@ -19,19 +18,17 @@ const Chat = () => {
 
   const clearMessage = () => {
     document.getElementById('chat-input').value = '';
-    setMessage('');
   }
 
   const sendMessage = (e) => {
     e.preventDefault();
     const msg = document.getElementById('chat-input').value;
-    setMessage(msg);
     socket.emit('message', msg);
     clearMessage();
   }
 
   const postMessage = (m) => {
-    let msg = document.createElement('li');
+    const msg = document.createElement('li');
     msg.textContent = m;
     document.getElementById('messages').appendChild(msg);
   }

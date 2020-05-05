@@ -25,14 +25,15 @@ io.on('connection', (socket) => {
   console.log('client connected');
 
   socket.on('message', data => {
-    //messages.push(data);
+    messages.push(data);
     io.emit('new message', data);
-    //messageCount++;
-    console.log(data);
+    console.log(messages[messageCount]);
+    messageCount++;
   });
 
   socket.on('disconnect', () => {
     console.log('client disconnected');
+    console.log(messages);
   });
 });
 

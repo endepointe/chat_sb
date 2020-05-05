@@ -10,14 +10,12 @@ router.use(function (req, res, next) {
 });
 
 router.get('/', (req, res) => {
-  res.send('home');
-  //res.render('index', { title: 'Ende', message: 'Ende' });
+  const data = {name: "dataname", value: "datavalue"}
+  res.send(data);
 });
 
 router.get('/chat', (req, res) => {
   res.send('chat');
-  console.log('chat');
 });
-
 
 module.exports = router;
