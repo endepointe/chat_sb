@@ -17,9 +17,6 @@ const Chat = () => {
     });
   });
 
-  const handleChange = (e) => {
-  }
-
   const clearMessage = () => {
     document.getElementById('chat-input').value = '';
     setMessage('');
@@ -30,7 +27,6 @@ const Chat = () => {
     const msg = document.getElementById('chat-input').value;
     setMessage(msg);
     socket.emit('message', msg);
-    //postMessage(msg);
     clearMessage();
   }
 
