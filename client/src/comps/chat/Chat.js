@@ -40,9 +40,11 @@ const Chat = () => {
 
   return (
     <div className='chat-container'>
+      <h1>Anon Chat</h1>
       <div id="chat-box">
         <ul id="messages"></ul>
       </div>
+      <h3>messages:</h3>
       <form onSubmit={sendMessage}>
         <input
           type="text"
