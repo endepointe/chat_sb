@@ -1,4 +1,5 @@
-const app = require('express')();
+const express = require('express');
+const app = express();
 const server = require('http').Server(app);
 //const io = require('socket.io')(server);
 ///*
@@ -12,9 +13,9 @@ const messages = [];
 let messageCount = 0;
 const bot = 'Abel';
 
-const port = normalizePort(process.env.PORT || '3001');
+const port = normalizePort(process.env.PORT || '3000');
 
-const indexRouter = require('./routes/index');
+//const indexRouter = require('./routes/index');
 
 app.set('port', port);
 app.set('views', path.join(__dirname, 'views'));
@@ -22,7 +23,13 @@ app.set('view engine', 'pug');
 
 app.use(cors());
 
-app.use(indexRouter);
+app.use(express.static(path.join(__dirname, '../client/build')));
+
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+});
+
+//app.use(indexRouter);
 
 io.on('connection', (socket) => {
   console.log('client connected');
