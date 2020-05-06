@@ -9,8 +9,8 @@ const io = require('socket.io')(server, {
 //*/
 const path = require('path');
 const cors = require('cors');
-const messages = [];
-let messageCount = 0;
+//const messages = [];
+//let messageCount = 0;
 const bot = 'Abel';
 
 const port = normalizePort(process.env.PORT || '3000');
