@@ -10,7 +10,7 @@ router.use(function (req, res, next) {
 });
 
 router.get('/', (req, res) => {
-  const data = { name: "dataname", value: "datavalue" }
+  const data = { name: "in", value: "progress" }
   res.send(data);
 });
 
