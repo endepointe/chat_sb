@@ -4,6 +4,7 @@ import React, {
 import './Chat.css';
 import io from 'socket.io-client';
 
+// Use when in dev, otherwise, comment out
 //const url = 'http://localhost:3001';
 
 const socket = io('/', {
@@ -34,6 +35,7 @@ const Chat = () => {
 
   const postMessage = (m) => {
     const msg = document.createElement('li');
+    msg.classList.add('chat-msg');
     msg.textContent = m;
     document.getElementById('messages').appendChild(msg);
   }
@@ -41,7 +43,13 @@ const Chat = () => {
   return (
     <div className='chat-container'>
       <h1>Anon Chat</h1>
+      <h2>todo list</h2>
+      <ul>
+        <li>- users for guest and account</li>
+        <li>- channels/rooms</li>
+      </ul>
       <h2>Admin is listening, stick around for a reply.</h2>
+      <h2>----temporary styling-----</h2>
       <h3>messages:</h3>
       <div id="chat-box">
         <ul id="messages"></ul>

@@ -1,3 +1,22 @@
+
+.chat-container {
+  width: 100%;
+  margin: 0 auto;
+}
+
 li {
   list-style: none;
+  margin: 0;
+  padding-left: 2rem;
+}
+
+#messages {
+  margin: 0;
+  padding: 0;
+}
+
+.chat-msg:nth-of-type(odd) {
+  background-color: black;
+  border-radius: 5px;
+  color: white;
 }

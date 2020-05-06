@@ -13,7 +13,13 @@ const messages = [];
 let messageCount = 0;
 const bot = 'Abel';
 
+// Use this when in prod
 const port = normalizePort(process.env.PORT || '3000');
+//
+
+// Use this when in dev 
+//const port = normalizePort(process.env.PORT || '3001');
+//
 
 //const indexRouter = require('./routes/index');
 
