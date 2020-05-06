@@ -41,6 +41,7 @@ const Chat = () => {
   return (
     <div className='chat-container'>
       <h1>Anon Chat</h1>
+      <h2>Admin is listening, stick around for a reply.</h2>
       <h3>messages:</h3>
       <div id="chat-box">
         <ul id="messages"></ul>
