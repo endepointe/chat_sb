@@ -4,14 +4,13 @@ import React, {
 import './Chat.css';
 import io from 'socket.io-client';
 
-const url = 'http://localhost:3001';
-//const socket = io(url);
-///*
+//const url = 'http://localhost:3001';
+
 const socket = io('/', {
   secure: true,
-  path: '/socket.io'
+  rejectUnauthorized: false,
+  path: '/chat'
 });
-//*/
 
 const Chat = () => {
 

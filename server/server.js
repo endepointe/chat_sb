@@ -3,7 +3,7 @@ const server = require('http').Server(app);
 //const io = require('socket.io')(server);
 ///*
 const io = require('socket.io')(server, {
-  path: '/socket.io'
+  path: '/chat'
 });
 //*/
 const path = require('path');
