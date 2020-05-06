@@ -41,8 +41,8 @@ const Chat = () => {
   return (
     <div className='chat-container'>
       <h1>Anon Chat</h1>
+      <h3>messages:</h3>
       <div id="chat-box">
-        <h3>messages:</h3>
         <ul id="messages"></ul>
       </div>
       <form onSubmit={sendMessage}>
