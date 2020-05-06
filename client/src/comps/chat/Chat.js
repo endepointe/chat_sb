@@ -1,12 +1,17 @@
 import React, {
-  useState,
   useEffect,
 } from 'react';
 import './Chat.css';
 import io from 'socket.io-client';
 
 const url = 'http://localhost:3001';
-const socket = io(url);
+//const socket = io(url);
+///*
+const socket = io('/', {
+  secure: true,
+  path: '/socket.io'
+});
+//*/
 
 const Chat = () => {
 
@@ -24,6 +29,7 @@ const Chat = () => {
     e.preventDefault();
     const msg = document.getElementById('chat-input').value;
     socket.emit('message', msg);
+    console.log(msg);
     clearMessage();
   }
 
