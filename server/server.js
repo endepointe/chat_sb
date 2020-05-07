@@ -11,6 +11,7 @@ const path = require('path');
 const cors = require('cors');
 const messages = [];
 let messageCount = 0;
+let userCount = 0;
 const bot = 'Abel';
 
 // Use this when in prod
@@ -38,18 +39,19 @@ app.get('/*', (req, res) => {
 //app.use(indexRouter);
 
 io.on('connection', (socket) => {
-  console.log('client connected');
-
+  userCount++;
+  console.log(`user count ${userCount}`);
   socket.on('message', data => {
     messages.push(data);
     io.emit('new message', data);
-    console.log(messages[messageCount]);
+    //console.log(messages[messageCount]);
     messageCount++;
   });
 
   socket.on('disconnect', () => {
-    console.log('client disconnected');
-    console.log(messages);
+    //console.log(messages);
+    userCount--;
+    console.log(`user count ${userCount}`);
   });
 });
 
