@@ -33,5 +33,5 @@
     ]
   },
   "homepage": "https://endepointe.com",
-  "proxy": "http://localhost:3001/"
+  "proxy": "http://localhost:3001"
 }

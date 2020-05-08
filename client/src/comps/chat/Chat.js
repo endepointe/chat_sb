@@ -4,14 +4,18 @@ import React, {
 import './Chat.css';
 import io from 'socket.io-client';
 
-// Use when in dev, otherwise, comment out
-//const url = 'http://localhost:3001';
+///* Use when in dev, otherwise, comment out
+const url = 'http://localhost:3001';
+const socket = io(url);
+//*/
 
+/*
 const socket = io('/', {
   secure: true,
   rejectUnauthorized: false,
-  path: '/chat'
+  path: '/socketio'
 });
+*/
 
 const Chat = () => {
 

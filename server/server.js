@@ -1,42 +1,43 @@
 const express = require('express');
 const app = express();
-const server = require('http').Server(app);
-//const io = require('socket.io')(server);
-///*
-const io = require('socket.io')(server, {
-  path: '/chat'
-});
-//*/
-const path = require('path');
 const cors = require('cors');
+app.use(cors());
+const server = require('http').Server(app);
+const path = require('path');
+const apiRouter = require('./api/index');
 const messages = [];
 let messageCount = 0;
 let userCount = 0;
 const bot = 'Abel';
 
-// Use this when in prod
-const port = normalizePort(process.env.PORT || '3000');
+// DEV
+const io = require('socket.io')(server);
+// PROD
+/*
+const io = require('socket.io')(server, {
+  path: '/socketio'
+});
+*/
+
+// PORTS for dev and prod
+// dev = 3001
+// prod = 3000
+const port = normalizePort(process.env.PORT || 3001);
 //
 
-// Use this when in dev 
-//const port = normalizePort(process.env.PORT || '3001');
-//
-
-//const indexRouter = require('./routes/index');
+///* MIDDLEWARE for prod 
+/*
+app.use(express.static(path.join(__dirname, '../client/build')));
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+});
+*/
 
 app.set('port', port);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-app.use(cors());
-
-app.use(express.static(path.join(__dirname, '../client/build')));
-
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
-});
-
-//app.use(indexRouter);
+app.use('/', apiRouter);
 
 io.on('connection', (socket) => {
   userCount++;
