@@ -13,10 +13,12 @@ li {
 #messages {
   margin: 0;
   padding: 0;
+  height: 180px;
+  overflow-y: scroll;
 }
 
 .chat-msg:nth-of-type(odd) {
-  background-color: black;
+  background-color: #666;
   border-radius: 5px;
   color: white;
 }

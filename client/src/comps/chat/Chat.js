@@ -4,56 +4,77 @@ import React, {
 import './Chat.css';
 import io from 'socket.io-client';
 
-///* Use when in dev, otherwise, comment out
+/* Use when in dev, otherwise, comment out
 const url = 'http://localhost:3001';
 const socket = io(url);
-//*/
+*/
 
-/*
+///*
 const socket = io('/', {
   secure: true,
   rejectUnauthorized: false,
   path: '/socketio'
 });
-*/
+//*/
 
-const Chat = () => {
+// name and room
+const Chat = (props) => {
 
   useEffect(() => {
-    socket.on('new message', (data) => {
-      postMessage(data);
+    socket.emit('join room', props.name, props.room);
+    socket.on('message', (data) => {
+      const el = document.getElementById('messages');
+      postMessage(data.username, data.message, data.time);
+      //console.log(data);
+      el.scrollTop = el.scrollHeight;
+    });
+    socket.on('room users', ({ room, users }) => {
+      outputRoomName(room);
+      outputUsers(users);
     });
   });
 
-  const clearMessage = () => {
-    document.getElementById('chat-input').value = '';
+  const outputRoomName = (room) => {
+    document.getElementById('roomName').innerText = room;
+  }
+
+  const outputUsers = (users) => {
+    document.getElementById('userList').innerHTML = `
+    ${users.map(user =>
+      `<li>${user.username}</li>`).join('')}
+    `;
+  }
+
+  const clearMessage = (e) => {
+    e.target.elements.chatInput.value = '';
+    e.target.elements.chatInput.focus();
   }
 
   const sendMessage = (e) => {
     e.preventDefault();
-    const msg = document.getElementById('chat-input').value;
-    socket.emit('message', msg);
-    console.log(msg);
-    clearMessage();
+    const msg = e.target.elements.chatInput.value;
+
+    // Emit message to server
+    socket.emit('new message', msg);
+
+    clearMessage(e);
   }
 
-  const postMessage = (m) => {
+  const postMessage = (n, m, t) => {
     const msg = document.createElement('li');
+    const msgs = document.getElementById('messages');
     msg.classList.add('chat-msg');
-    msg.textContent = m;
-    document.getElementById('messages').appendChild(msg);
+    msg.textContent = `[${t}] ${n}:  ${m}.`;
+    msgs.appendChild(msg);
+    msgs.scrollTop = msgs.scrollHeight;
   }
 
   return (
     <div className='chat-container'>
-      <h1>Anon Chat</h1>
-      <h2>todo list</h2>
-      <ul>
-        <li>- users for guest and account</li>
-        <li>- channels/rooms</li>
-      </ul>
-      <h2>Admin is listening, stick around for a reply.</h2>
-      <h2>----temporary styling-----</h2>
+      <h1>Room: <span id='roomName'></span></h1>
+      <h2>Users: </h2>
+      <ul id="userList"></ul>
+
       <h3>messages:</h3>
       <div id="chat-box">
         <ul id="messages"></ul>
@@ -61,7 +82,7 @@ const Chat = () => {
       <form onSubmit={sendMessage}>
         <input
           type="text"
-          id='chat-input'
+          id='chatInput'
           autoFocus
         />
         <button type="submit">Send</button>
