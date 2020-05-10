@@ -52,13 +52,16 @@ const ChatLogin = () => {
           </main>
         </div>}
       <div>
-        <h3>To do list</h3>
+        <h3>site status: in testing and development.</h3>
+        <h4>To do list</h4>
         <ul>
           <li>- add authentication</li>
           <li>- minimize chat section of site</li>
+          <li>- add services and client portal</li>
           <li>- add routing</li>
-          <li>- make it pretty</li>
-          <li>- continuously improve it</li>
+          <li>- add emailing</li>
+          <li>- enable the chat bot to help clients</li>
+          <li>- complete styling</li>
         </ul>
       </div>
     </div>
