@@ -87,6 +87,16 @@ const Chat = (props) => {
         />
         <button type="submit">Send</button>
       </form>
+      <div>
+        <h3>To do list</h3>
+        <ul>
+          <li>- add authentication</li>
+          <li>- minimize chat section of site</li>
+          <li>- add routing for api</li>
+          <li>- make it pretty</li>
+          <li>- continuously improve it</li>
+        </ul>
+      </div>
     </div>
   )
 }
