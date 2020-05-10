@@ -56,7 +56,7 @@ const ChatLogin = () => {
         <ul>
           <li>- add authentication</li>
           <li>- minimize chat section of site</li>
-          <li>- add routing for api</li>
+          <li>- add routing</li>
           <li>- make it pretty</li>
           <li>- continuously improve it</li>
         </ul>
