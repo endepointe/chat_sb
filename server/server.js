@@ -30,16 +30,16 @@ const io = require('socket.io')(server, {
 // PORTS for dev and prod
 // dev = 3001
 // prod = 3000
-const port = normalizePort(process.env.PORT || 3000);
+const port = normalizePort(process.env.PORT || 3001);
 //
 
 /// MIDDLEWARE for prod 
-///*
+/*
 app.use(express.static(path.join(__dirname, '../client/build')));
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
-//*/
+*/
 
 app.set('port', port);
 app.set('views', path.join(__dirname, 'views'));

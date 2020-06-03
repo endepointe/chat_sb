@@ -5,8 +5,7 @@ import ChatLogin from './comps/chat/ChatLogin';
 const App = () => {
   return (
     <div>
-      <NavBar />
-      <ChatLogin />
+      <p>new beginnings</p>
     </div>
   );
 }
